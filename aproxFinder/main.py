@@ -17,10 +17,10 @@ def rate_approximation(x, approximation):
 @click.option('--num', help='Number to approximate', required=True)
 def generate(num):
     """Generate an approximation"""
-    if not num.isnumeric():
+    if not num.replace(".", "").isnumeric():
         click.echo("--num must be a number")
         return
-    num = int(num)
+    num = float(num)
     score_dict = {}
     for x in tqdm(range(1, 1000)):
         for y in range(1, 1000):
@@ -32,5 +32,5 @@ def generate(num):
     best[1][1] //= common
     click.echo("     Result     ")
     click.echo("-"*17)
-    click.echo(f"Score (lowest is better): {best[0]}")
+    click.echo(f"Score (lower is better) : {best[0]}")
     click.echo(f"Approximation (fraction): {best[1]}")
